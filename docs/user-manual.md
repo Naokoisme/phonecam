@@ -12,6 +12,8 @@
 
 PhoneCam 可以把你的 Android 手机变成 Windows 电脑的摄像头。安装后，电脑里会多出一个名为 **"PhoneCam Camera"** 的摄像头设备，腾讯会议、Zoom、OBS、钉钉等软件都可以直接使用。
 
+> 📌 **说明**：PhoneCam 目前专注于提供高清低延迟视频画面，**暂不传输手机音频**；会议语音交流请使用电脑自带麦克风或外接耳机。
+
 支持两种连接方式：
 - **USB 数据线连接**（推荐，更稳定、延迟更低）
 - **Wi-Fi 无线连接**（无需数据线，但受网络环境影响）
@@ -35,14 +37,14 @@ PhoneCam 可以把你的 Android 手机变成 Windows 电脑的摄像头。安�
 
 | 平台 | 文件 | 说明 |
 |------|------|------|
-| Windows | `PhoneCam-2.0.1-Setup.exe` | 电脑端安装程序 |
-| Android | `PhoneCam-Android-v0.2.8.apk` | 手机端 App |
+| Windows | `PhoneCam-Windows-v2.0.3.exe` | 电脑端安装程序（已内置配套 Android APK） |
+| Android | `PhoneCam-Android-v2.0.3.apk` | 手机端 App（若无法通过电脑端自动安装或独立使用时下载） |
 
 ---
 
 ## 第二步：安装 Windows 端
 
-1. 双击 `PhoneCam-2.0.1-Setup.exe`
+1. 双击 `PhoneCam-Windows-v2.0.3.exe`
 2. 按向导提示点击“下一步”
 3. 在选择附加任务时，建议勾选 **“启用 USB 连接”**
    - 这会打开 USB 连接设置，自动从 Android 官方下载并配置 ADB 工具
@@ -196,7 +198,8 @@ PhoneCam 可以把你的 Android 手机变成 Windows 电脑的摄像头。安�
 
 ## 相关文档
 
-- [当前状态 / current-status.md](current-status.md)
 - [已知问题 / known-issues.md](known-issues.md)
+- [开发指南 / development.md](development.md)
+- [版本发布说明 / releases/v2.0.3.md](releases/v2.0.3.md)
 - [项目架构 / current-architecture.md](current-architecture.md)
 - [协议说明 / protocol.md](protocol.md)

@@ -77,6 +77,16 @@ jobs:
       - name: Check out source
         uses: actions/checkout@v6
 
+      - name: Verify release notes exist
+        shell: pwsh
+        run: |
+          $notesFile = "docs/releases/v$env:APP_VERSION.md"
+          if (-not (Test-Path -LiteralPath $notesFile -PathType Leaf)) {
+            throw "Release notes file was not found: $notesFile"
+          }
+          Add-Content -Path $env:GITHUB_ENV -Value "RELEASE_NOTES_PATH=$notesFile"
+          Write-Host "Verified release notes exist: $notesFile"
+
       - name: Initialize vcpkg cache directories
         shell: pwsh
         run: |
@@ -140,10 +150,14 @@ jobs:
             throw "Published Android APK SHA-256 mismatch."
           }
 
-          $checksumPath = "$apk.sha256"
-          "$actualHash *$env:ANDROID_APK_NAME" |
+          # 复制为统一公开命名 PhoneCam-Android-v${APP_VERSION}.apk，保留哈希与签名
+          $publicApk = Join-Path $apkDir "PhoneCam-Android-v$env:APP_VERSION.apk"
+          Copy-Item -LiteralPath $apk -Destination $publicApk -Force
+
+          $checksumPath = "$publicApk.sha256"
+          "$actualHash *$(Split-Path -Leaf $publicApk)" |
             Set-Content -LiteralPath $checksumPath -Encoding ascii -NoNewline
-          Add-Content -Path $env:GITHUB_ENV -Value "ANDROID_APK_PATH=$apk"
+          Add-Content -Path $env:GITHUB_ENV -Value "ANDROID_APK_PATH=$publicApk"
           Add-Content -Path $env:GITHUB_ENV -Value "ANDROID_APK_CHECKSUM_PATH=$checksumPath"
 
       - name: Stage and verify runtime dependencies
@@ -177,18 +191,27 @@ jobs:
             throw "Expected installer was not created: $installer"
           }
 
-          $checksum = (Get-FileHash -LiteralPath $installer -Algorithm SHA256).Hash.ToLowerInvariant()
-          $checksumPath = "$installer.sha256"
-          "$checksum *$(Split-Path -Leaf $installer)" |
+          # 复制为统一公开命名 PhoneCam-Windows-v${APP_VERSION}.exe，不修改内部 phonecam.iss
+          $publicInstaller = Join-Path $PWD "dist\PhoneCam-Windows-v$env:APP_VERSION.exe"
+          Copy-Item -LiteralPath $installer -Destination $publicInstaller -Force
+
+          $checksum = (Get-FileHash -LiteralPath $publicInstaller -Algorithm SHA256).Hash.ToLowerInvariant()
+          $checksumPath = "$publicInstaller.sha256"
+          "$checksum *$(Split-Path -Leaf $publicInstaller)" |
             Set-Content -LiteralPath $checksumPath -Encoding ascii -NoNewline
+
+          Add-Content -Path $env:GITHUB_ENV -Value "WINDOWS_INSTALLER_PATH=$publicInstaller"
+          Add-Content -Path $env:GITHUB_ENV -Value "WINDOWS_INSTALLER_CHECKSUM_PATH=$checksumPath"
 
       - name: Upload workflow artifact
         uses: actions/upload-artifact@v7
         with:
           name: PhoneCam-${{ steps.version.outputs.app_version }}-Windows-x64
           path: |
-            dist/PhoneCam-${{ steps.version.outputs.app_version }}-Setup.exe
-            dist/PhoneCam-${{ steps.version.outputs.app_version }}-Setup.exe.sha256
+            dist/PhoneCam-Windows-v${{ steps.version.outputs.app_version }}.exe
+            dist/PhoneCam-Windows-v${{ steps.version.outputs.app_version }}.exe.sha256
+            dist/android-release-input/PhoneCam-Android-v${{ steps.version.outputs.app_version }}.apk
+            dist/android-release-input/PhoneCam-Android-v${{ steps.version.outputs.app_version }}.apk.sha256
           if-no-files-found: error
           retention-days: 14
 
@@ -199,21 +222,25 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           $tag = "v$env:APP_VERSION"
-          $installer = "dist\PhoneCam-$env:APP_VERSION-Setup.exe"
-          $checksum = "$installer.sha256"
+          $installer = $env:WINDOWS_INSTALLER_PATH
           $androidApk = $env:ANDROID_APK_PATH
-          $androidChecksum = $env:ANDROID_APK_CHECKSUM_PATH
+          $notesFile = $env:RELEASE_NOTES_PATH
 
           gh release view $tag --repo $env:GITHUB_REPOSITORY *> $null
           if ($LASTEXITCODE -eq 0) {
-            gh release upload $tag $installer $checksum $androidApk $androidChecksum `
+            gh release upload $tag $installer $androidApk `
               --clobber --repo $env:GITHUB_REPOSITORY
+            if ($LASTEXITCODE -ne 0) { throw "Failed to upload release assets for $tag." }
+
+            gh release edit $tag `
+              --notes-file $notesFile `
+              --repo $env:GITHUB_REPOSITORY
+            if ($LASTEXITCODE -ne 0) { throw "Failed to update release notes for $tag." }
           } else {
-            gh release create $tag $installer $checksum $androidApk $androidChecksum `
+            gh release create $tag $installer $androidApk `
               --repo $env:GITHUB_REPOSITORY `
               --target $env:GITHUB_SHA `
               --title "PhoneCam $tag" `
-              --generate-notes
+              --notes-file $notesFile
+            if ($LASTEXITCODE -ne 0) { throw "Failed to create GitHub Release $tag." }
           }
-
-          if ($LASTEXITCODE -ne 0) { throw "Failed to publish GitHub Release $tag." }
