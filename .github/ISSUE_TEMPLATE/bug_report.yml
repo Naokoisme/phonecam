@@ -1,0 +1,93 @@
+name: Bug report / 缺陷报告
+description: Report a reproducible PhoneCam problem / 报告可复现的 PhoneCam 问题
+title: "[Bug] "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting a problem. Please remove private information from logs and screenshots before uploading them.
+
+        感谢反馈问题。上传日志或截图前，请先删除账号名、IP 地址、设备标识符等敏感信息。
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting / 提交前确认
+      options:
+        - label: I checked the user manual, English FAQ, and known issues. / 我已查看用户手册、英文 FAQ 和已知问题。
+          required: true
+        - label: I searched existing issues for the same problem. / 我已搜索是否存在相同问题。
+          required: true
+
+  - type: input
+    id: phone
+    attributes:
+      label: Phone model and Android version / 手机型号与 Android 版本
+      placeholder: Example / 示例：Xiaomi 14, Android 15
+    validations:
+      required: true
+
+  - type: input
+    id: windows
+    attributes:
+      label: Windows version / Windows 版本
+      placeholder: Example / 示例：Windows 11 24H2, x64
+    validations:
+      required: true
+
+  - type: dropdown
+    id: connection
+    attributes:
+      label: Connection / 连接方式
+      options:
+        - USB
+        - Wi-Fi
+        - Both / 两者都有
+        - Not applicable / 不适用
+    validations:
+      required: true
+
+  - type: input
+    id: application
+    attributes:
+      label: Video application and version / 视频软件及版本
+      description: Leave blank if the problem occurs before selecting PhoneCam Camera. / 如果问题发生在选择 PhoneCam Camera 之前，可留空。
+      placeholder: Example / 示例：Tencent Meeting 3.x
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce / 复现步骤
+      placeholder: |
+        1. Open...
+        2. Connect...
+        3. Observe...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior / 预期行为
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior / 实际行为
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Logs and screenshots / 日志与截图
+      description: Optional. Remove private information before uploading. / 选填；上传前请删除敏感信息。
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional context / 补充信息

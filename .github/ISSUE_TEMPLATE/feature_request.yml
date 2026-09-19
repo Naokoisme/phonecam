@@ -1,0 +1,39 @@
+name: Feature request / 功能建议
+description: Suggest an improvement based on a real use case / 基于真实使用场景提出改进建议
+title: "[Feature] "
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Describe the user problem before proposing a solution. This helps evaluate alternatives and scope.
+
+        请先描述实际使用问题，再提出解决方案，以便判断范围和替代路径。
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: User problem / 使用问题
+      description: What are you trying to do, and what currently prevents it? / 你想完成什么？当前障碍是什么？
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior / 期望行为
+      description: Describe what PhoneCam should do from the user's perspective. / 从用户视角描述 PhoneCam 应该如何工作。
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives tried / 已尝试的替代方案
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context / 补充信息
+      description: Add examples or screenshots only after removing private information. / 示例或截图中请先删除敏感信息。

@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: English FAQ
+    url: https://github.com/Naokoisme/phonecam/blob/master/docs/faq.en.md
+    about: Check common installation, connection, and compatibility questions.
+  - name: 中文用户手册
+    url: https://github.com/Naokoisme/phonecam/blob/master/docs/user-manual.md
+    about: 查看安装、连接、使用和排障步骤。
+  - name: Download the latest release / 下载最新版
+    url: https://github.com/Naokoisme/phonecam/releases/latest
+    about: Download the current Windows and Android packages.
