@@ -1,6 +1,10 @@
-# PhoneCam
+# PhoneCam for Android and Windows
+
+简体中文 · [English](README.en.md)
 
 把 Android 手机变成 Windows 电脑的摄像头，支持 USB 数据线和 Wi-Fi 连接。免费开源。
+
+Turn your Android phone into a USB or Wi-Fi webcam for Windows. Free and open source.
 
 [![GitHub Release](https://img.shields.io/github/v/release/Naokoisme/phonecam?style=flat-square)](https://github.com/Naokoisme/phonecam/releases/latest)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE)
@@ -37,7 +41,7 @@
 
 ## 帮助与反馈
 
-连接不上、没有画面或有使用建议，可[提交 Issue](https://github.com/Naokoisme/phonecam/issues)，也可以发邮件到 [23lqhu@stu.edu.cn](mailto:23lqhu@stu.edu.cn)。
+连接不上、没有画面或有使用建议，可先查看[用户手册](docs/user-manual.md)或[English FAQ](docs/faq.en.md)，也可以[提交 Issue](https://github.com/Naokoisme/phonecam/issues)或发邮件到 [23lqhu@stu.edu.cn](mailto:23lqhu@stu.edu.cn)。
 
 请告诉我手机型号、Windows 版本，以及卡在哪一步。电脑端的“导出日志”可帮助排查，日志可由你选择附上。
 
