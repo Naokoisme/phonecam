@@ -45,8 +45,8 @@ Turn your Android phone into a USB or Wi-Fi webcam for Windows. Free and open so
 
 请告诉我手机型号、Windows 版本，以及卡在哪一步。电脑端的“导出日志”可帮助排查，日志可由你选择附上。
 
-PhoneCam 是个人维护的 vibe coding 开源项目，感谢每一份实际使用反馈。
+PhoneCam 是个人维护的开源项目，感谢每一份实际使用反馈、兼容性测试和文档改进。
 
 ## 参与开发
 
-[开发与构建指南](docs/development.md) · [系统架构](docs/current-architecture.md) · [传输协议](docs/protocol.md) · [MIT 许可证](LICENSE)
+[贡献指南](CONTRIBUTING.md) · [开发与构建指南](docs/development.md) · [系统架构](docs/current-architecture.md) · [传输协议](docs/protocol.md) · [MIT 许可证](LICENSE)

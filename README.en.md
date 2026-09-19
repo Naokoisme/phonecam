@@ -18,7 +18,7 @@ PhoneCam supports **Windows 10/11 (x64)** and **Android 7.0 or later**. The Wind
 
 The Windows installer includes a tool that can install the companion Android app. You only need to download the APK separately when installing it manually.
 
-[Release notes](docs/releases/v2.0.3.md) · [All releases](https://github.com/Naokoisme/phonecam/releases)
+[Release notes](docs/releases/v2.0.3.en.md) · [All releases](https://github.com/Naokoisme/phonecam/releases)
 
 ## Quick start
 
@@ -46,4 +46,4 @@ You can also email [23lqhu@stu.edu.cn](mailto:23lqhu@stu.edu.cn). PhoneCam is a 
 
 ## Development
 
-[Build guide](docs/development.md) · [Architecture](docs/current-architecture.md) · [Protocol](docs/protocol.md) · [MIT License](LICENSE)
+[Contributing](CONTRIBUTING.md) · [Build guide](docs/development.md) · [Architecture](docs/current-architecture.md) · [Protocol](docs/protocol.md) · [MIT License](LICENSE)
