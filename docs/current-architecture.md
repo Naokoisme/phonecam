@@ -19,7 +19,7 @@ Windows 电脑端 (Client)
   -> FFmpeg 硬解码
   -> 统一合成 NV12 帧
   -> 写入虚拟摄像头 (DirectShow)
-  -> 腾讯会议 / Zoom / OBS 等应用读取
+  -> 兼容 Windows 虚拟摄像头的应用读取（目前已实测腾讯会议）
 ```
 
 ---

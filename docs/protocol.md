@@ -2,7 +2,7 @@
 
 > 最后更新：2026-06-20
 >
-> 本文只记录当前仍应参考的协议事实。当前产品状态见 [`current-status.md`](current-status.md)。
+> 本文只记录当前仍应参考的协议事实。当前系统结构见[架构概述](current-architecture.md)，普通用户的功能与限制见[用户手册](user-manual.md)和[已知问题](known-issues.md)。
 
 ## 当前使用方式
 
